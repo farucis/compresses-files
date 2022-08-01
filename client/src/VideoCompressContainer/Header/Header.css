@@ -1,0 +1,52 @@
+/* Header CSS  */
+.header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+  min-width: 100vw;
+  background-color: rgb(245, 245, 245);
+}
+
+/* Header Parent  */
+.header-parent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 70px;
+  min-width: 90vw;
+  padding-inline: 10px;
+  background-color: rgb(230, 230, 230);
+}
+.header-parent a {
+  min-width: 100px;
+  min-height: 70px;
+  font-size: calc(10px + 2vmin);
+  color: rgb(52, 12, 12);
+
+  background-size: cover;
+  background-position: center;
+  background-image: url("https://video4change.org/wp-content/uploads/2014/03/video-compression-image-1.png");
+
+}
+
+/* Header Options  */
+
+.header-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-inline: 8px;
+  background-color: rgb(215, 215, 215);
+  width: 60%;
+}
+
+.header-options a {
+  font-size: calc(6px + 2vmin);
+  font-weight: 500;
+  color: rgb(52, 12, 12);
+  background-color: rgb(200, 200, 200);
+  text-decoration: none;
+  background-image: none;
+}
