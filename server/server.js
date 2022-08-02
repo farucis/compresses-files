@@ -8,7 +8,7 @@ const app = express();
 
 app.use("/api", videoRouter);
 
-app.use(bodyParser.json({ limit: "50mb" , extended: true}));
+app.use(bodyParser.json({ limit: "50mb" , extended: false}));
 app.use(bodyParser.urlencoded({ limit: "50mb" , extended: false}));
 app.use(cors());
 

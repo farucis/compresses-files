@@ -6,29 +6,30 @@
   justify-content: center;
   min-height: 100px;
   min-width: 100vw;
-  background-color: rgb(245, 245, 245);
 }
 
-/* Header Parent  */
+/* Header Parent CSS  */
 .header-parent {
   display: flex;
   justify-content: space-between;
   align-items: center;
   min-height: 70px;
   min-width: 90vw;
+  padding: 5px;
   padding-inline: 10px;
-  background-color: rgb(230, 230, 230);
+  border-radius: 20px;
+  background-color: #333333f8;
 }
-.header-parent a {
-  min-width: 100px;
-  min-height: 70px;
-  font-size: calc(10px + 2vmin);
+.header-parent .icon {
+  min-height: 60px;
+  min-width: 68px;
+  font-size: calc(14px + 2vmin);
   color: rgb(52, 12, 12);
-
   background-size: cover;
   background-position: center;
+  padding-left: 80px;
+  opacity: 0.8;
   background-image: url("https://video4change.org/wp-content/uploads/2014/03/video-compression-image-1.png");
-
 }
 
 /* Header Options  */
@@ -36,17 +37,41 @@
 .header-options {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding-inline: 8px;
-  background-color: rgb(215, 215, 215);
-  width: 60%;
+  height: 40px;
+  width: 40%;
 }
 
 .header-options a {
   font-size: calc(6px + 2vmin);
   font-weight: 500;
-  color: rgb(52, 12, 12);
-  background-color: rgb(200, 200, 200);
+  color: rgb(236, 236, 236);
   text-decoration: none;
-  background-image: none;
+}
+
+.hover-underline-animation {
+  display: inline-block;
+  position: relative;
+  color: #e6e6e6;
+}
+
+.hover-underline-animation:after {
+  content: "";
+  position: absolute;
+  width: 105%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #6a0061;
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+}
+
+.hover-underline-animation:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+  transition: transform 0.3s ease-in-out;
+
 }

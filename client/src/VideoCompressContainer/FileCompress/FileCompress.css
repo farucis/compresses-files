@@ -1,4 +1,19 @@
-.video-screen{
-    width: 200px;
-    height: 200px;
+/*--------Export Default FileCompress CSS--------*/
+
+.file-compress-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  min-width: 100vw;
+}
+
+.results-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 30px;
+  min-height: 330px;
+  min-width: 90vw;
+  border-radius: 20px;
+  background-color: #3333339e;
 }

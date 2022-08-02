@@ -1,16 +1,14 @@
-//import Ffmpeg from "fluent-ffmpeg";
 import React from "react";
 import "./FileCompress.css";
+import FileInput from "./FileInput/FileInput";
+
+/*--------Export Default FileCompress--------*/
 
 const FileCompress = () => {
   const [videoFile, setVideoFile] = React.useState(null);
   const [compressVideoFile, setCompressVideoFile] = React.useState(null);
 
   const [backEndData, setBackEndData] = React.useState(null);
-
-  React.useEffect(() => {
-    // console.log(backEndData);
-  }, []);
 
   const compress = async (video) => {
     if (video) {
@@ -23,135 +21,88 @@ const FileCompress = () => {
       .then((data) => {
         setBackEndData(data);
       });
+
     //console.log(fileName, baseName);
-    /*
-    Ffmpeg(fileName)
-      .output(baseName + "-1280x720.mp4")
-      .videoCodec("libx264")
-      .noAudio()
-      .size("1280x720")
-      .fps(30)
-      .format("mp4")
-
-      .on("end", function () {
-        console.log("Finished processing");
-      })
-
-      .run();
-      */
   };
 
   const compressVideo = () => {
-    let compresedVideo = videoFile;
-    compress(compresedVideo);
-    setCompressVideoFile(compresedVideo);
+    let compresedVideo = compress(videoFile);
+
+    setCompressVideoFile(videoFile);
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        minHeight: "80vh",
-        minWidth: "100vw",
-        backgroundColor: "#eed",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          minHeight: "60vh",
-          minWidth: "60vw",
-          paddingInline: "20px",
-          backgroundColor: "#eee",
-        }}
-        id="fileInput"
-      >
-        <div
-          className="inputArea"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            alignItems: "center",
-            backgroundColor: "#edd",
-            color: "#5ad",
-            height: "240px",
-            width: "400px",
-            borderRadius: "10px",
-            border: "1px solid #000",
-            padding: "10px",
-            paddingBlock: "20px",
-          }}
+    <div className="file-compress-container">
+      <FileInput videoFile={videoFile} setVideoFile={setVideoFile} />
+
+      <div>
+        <button
+          className="btn btn-dark"
+          style={{ margin: "40px" }}
+          onClick={() => compressVideo()}
         >
-          <input
-            type="file"
-            id="file"
-            name="file"
-            accept="video/*"
-            //multiple
-            style={{
-              backgroundColor: "#eed",
-              fontSize: "18px",
-            }}
-            onChange={(e) => setVideoFile(e.target.files[0])}
-          />
-          {videoFile && (
-            <i
-              style={{ fontSize: "120px", paddingBottom: "10px" }}
-              className="bi bi-file-earmark-play-fill"
-            ></i>
-          )}
-        </div>
-        <div
-          className="video-screen"
-          style={{
-            display: "flex",
-            backgroundColor: "#edd",
-            color: "#5ad",
-            height: "260px",
-            width: "360px",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          {videoFile && (
-            <video width="320" height="240" controls>
-              <source src={URL.createObjectURL(videoFile)} type="video/mp4" />
-            </video>
-          )}
-        </div>
+          compress
+        </button>
       </div>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          marginTop: "10px",
-        }}
-        id="fileCompress"
-      >
-        <button onClick={() => compressVideo()}>compress</button>
-        {compressVideoFile ? (
-          <>
-            <a href={URL.createObjectURL(compressVideoFile)} download>
-              <button>download</button>
-            </a>
-            <h1>compressVideoFile compleate</h1>
-          </>
-        ) : null}
-      </div>
-      {typeof backEndData?.users === "undefined" ? (
-        <p>Loading . . .</p>
-      ) : (
-        backEndData.users.map((user, i) => <p key={i}>{user}</p>)
-      )}
+
+      <Results
+        backEndData={backEndData}
+        compressVideoFile={compressVideoFile}
+      />
     </div>
   );
 };
+//--------Help Components--------//
+
+/*----Results----*/
+const Results = ({ backEndData, compressVideoFile }) => (
+  <div className="results-container">
+    <DownloadButton compressVideoFile={compressVideoFile} />
+    <ResultsData backEndData={backEndData} />
+  </div>
+);
+
+/*----Download Button----*/
+const DownloadButton = ({ compressVideoFile }) => (
+  <div>
+    {compressVideoFile ? (
+      <div style={{ textAlign: "center" }}>
+        <a href={URL.createObjectURL(compressVideoFile)} download>
+          <button className="btn btn-success" style={{ margin: "40px" }}>
+            download
+          </button>
+        </a>
+        <h1 style={{ fontSize: "30px", color: "white", opacity: "0.7" }}>
+          Compress Video File Compleate
+        </h1>
+      </div>
+    ) : null}
+  </div>
+);
+
+/*----Results Data----*/
+const ResultsData = ({ backEndData }) => (
+  <div
+    style={{
+      border: "1px solid #3d3d3de8",
+      borderRadius: "20px",
+      padding: "20px",
+      minWidth: "70%",
+    }}
+  >
+    {typeof backEndData?.admins === "undefined" ? (
+      <h1 style={{ fontSize: "30px", color: "white", opacity: "0.7" }}>
+        Loading . . .
+      </h1>
+    ) : (
+      <>
+        <h1>admins</h1>
+        {backEndData.admins.map((admin, i) => (
+          <p key={i}>{admin}</p>
+        ))}
+      </>
+    )}
+  </div>
+);
 
 export default FileCompress;

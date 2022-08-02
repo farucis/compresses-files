@@ -1,0 +1,43 @@
+/*--------Export Default FileInput CSS--------*/
+.file-input-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100%;
+  min-width: 70vw;
+  padding-inline: 5px;
+}
+
+
+
+/*--------Help Components CSS--------*/
+/*----Input Video File CSS----*/
+.input-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3333339e;
+  color: #5ad;
+  height: 260px;
+  width: 60%;
+  border-radius: 10px;
+  padding: 10px;
+  padding-block: 10px;
+}
+.input-file {
+  border-radius: 20px;
+  background-color: rgba(125, 123, 123, 0.748);
+  font-size: 18px;
+  width: 70%;
+}
+
+
+/*----Show Video File CSS----*/
+.video-screen {
+  display: flex;
+  width: 260px;
+  height: 35%;
+  align-items: center;
+  justify-content: center;
+}
