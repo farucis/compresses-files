@@ -1,5 +1,7 @@
 import React from "react";
 import "./FileCompress.css";
+import axios from "axios";
+
 import FileInput from "./FileInput/FileInput";
 
 /*--------Export Default FileCompress--------*/
@@ -7,27 +9,46 @@ import FileInput from "./FileInput/FileInput";
 const FileCompress = () => {
   const [videoFile, setVideoFile] = React.useState(null);
   const [compressVideoFile, setCompressVideoFile] = React.useState(null);
-
   const [backEndData, setBackEndData] = React.useState(null);
 
   const compress = async (video) => {
     if (video) {
-      var fileName = video.name;
-      var baseName = fileName.substring(0, fileName.lastIndexOf("."));
+      /*----Compress Video File Data----*/
+      const data = {
+        fileName: video.name,
+        baseName: video.name.substring(0, video.name.lastIndexOf(".")),
+      };
+
+      /*--------Send Video File to BackEnd--------*/
+      await axios
+        .post("/video-compress", data)
+        .then((res) => {
+          console.log("video compress start");
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          console.log("video compress compleate");
+        });
+
+      /*--------Get Video File from BackEnd--------*/
+      axios
+        .get("video-upload")
+        .then((res) => {
+          setBackEndData(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          console.log("video upload compleate");
+        });
     }
-
-    fetch("api")
-      .then((res) => res.json())
-      .then((data) => {
-        setBackEndData(data);
-      });
-
-    //console.log(fileName, baseName);
   };
 
   const compressVideo = () => {
     let compresedVideo = compress(videoFile);
-
     setCompressVideoFile(videoFile);
   };
 
